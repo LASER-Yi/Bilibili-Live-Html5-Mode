@@ -14,7 +14,7 @@ function intoPipMode(event){
         return;
     }
     var originUrl = safari.application.activeBrowserWindow.activeTab.url;
-    var roomid = window.location.href.match(/\d+/g);
+    //var roomid = window.location.href.match(/\d+/g);
     originUrl = originUrl.slice(8);
     originUrl = originUrl.slice(originUrl.indexOf("/") + 1);
     var path = "http://live.bilibili.com/api/h5playurl?roomid=" + originUrl + "&callback=jsonpCallback";
