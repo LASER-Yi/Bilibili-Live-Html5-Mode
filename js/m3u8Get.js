@@ -27,5 +27,6 @@ function m3u8Get(roomID) {
     });
     return outData
 }
+//执行函数,赋值只是为了log一下
 var a = m3u8Get(roomID);
-console.log(a);
+// console.log(a);
