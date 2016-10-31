@@ -3,20 +3,29 @@
 <html>
     <body>
         <script src = "jquery.min.js"></script>
+        <script src = "m3u8Get.js"></script>
         <script>
-            var roomID = 5420;
+            var roomNum = 5420;
+            var url;
             $.ajax({
+                   async: false,
+                   //目标地址
                    url: 'http://live.bilibili.com/api/h5playurl',
                    type: 'get',
                    dataType: 'jsonp',
-                   data:{
-                   roomid: roomID
+                   //url?后传的参数
+                   data: {
+                   roomid: roomNum
                    },
-                   success: function (result) {
-                   var urlData = result.durl[0].url;
-                   document.write(urlData);
+                   //成功后会把jsonp传到函数的参数中
+                   success: function (data) {
+                   console.log(data.durl[0].url);
+                   //document.write(data.durl[0].url);
+                   url = data.durl[0].url;
                    }
                    });
+            //var url = m3u8Get(5420);
+            document.write(url);
         </script>
     </body>
 </html>

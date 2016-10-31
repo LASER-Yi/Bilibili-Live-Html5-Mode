@@ -1,7 +1,7 @@
 var re = /^http:\/\/live.bilibili.com/;
 
 if(re.exec(window.location.href) != null){
-    var roomID = 5067
+    var roomNum = ROOMID;
     $.ajax({
            //目标地址
            url: 'http://live.bilibili.com/api/h5playurl',
@@ -9,11 +9,13 @@ if(re.exec(window.location.href) != null){
            dataType: 'jsonp',
            //url?后传的参数
            data: {
-           roomid: roomID
+           roomid: roomNum
            },
            //成功后会把jsonp传到函数的参数中
-           success: function(json) {
-           console.log(json);
+           success: function (data) {
+           console.log(data.durl[0].url);
+           //document.write(data.durl[0].url);
+           
            }
            });
 }
