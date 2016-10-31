@@ -5,33 +5,36 @@ if(re.exec(window.location.href) != null){
     var add_script = document.createElement('script');
     add_script.innerHTML = '\
     function replace2H5(){ \
-        $.ajax({ \
-               url: "http://live.bilibili.com/api/h5playurl", \
-               type: "get", \
-               dataType: "jsonp", \
-               data: { \
-               roomid: ROOMID \
-               }, \
-               async: false, \
-               success: function (data) { \
-               console.log("Successfully return html5 URL:" + data.durl[0].url); \
-               var h5Url = data.durl[0].url; \
-               var divElements = document.getElementById("player-container"); \
-               var needDel = document.getElementById("player_object"); \
-               divElements.removeChild(needDel); \
-               var h5Video = document.createElement("video");\
-               h5Video.setAttribute("src", h5Url); \
-               h5Video.setAttribute("width", "100%"); \
-               h5Video.setAttribute("height", "100%"); \
-               h5Video.setAttribute("id", "player_object"); \
-               h5Video.setAttribute("controls", "controls"); \
-               h5Video.setAttribute("autoplay", "autoplay"); \
-               divElements.appendChild(h5Video); \
-               } \
-               }); \
-    }';
+            $.ajax({ \
+                   url: "http://live.bilibili.com/api/h5playurl", \
+                   type: "get",\
+                   dataType: "jsonp",\
+                   data: {\
+                   roomid: ROOMID\
+                   },\
+                   async: false,\
+                   success: function (data) {\
+                   console.log("Successfully return html5 URL:" + data.durl[0].url);\
+                   var h5Url = data.durl[0].url;\
+                   var divElements = document.getElementById("player-container");\
+                   var needDel = document.getElementById("player_object");\
+                   divElements.removeChild(needDel);\
+                   var h5Video = document.createElement("video");\
+                   h5Video.setAttribute("src", h5Url);\
+                   h5Video.setAttribute("width", "100%");\
+                   h5Video.setAttribute("height", "100%");\
+                   h5Video.setAttribute("id", "player_object");\
+                   h5Video.setAttribute("controls", "controls");\
+                   h5Video.setAttribute("autoplay", "autoplay");\
+                   divElements.appendChild(h5Video);\
+                   }\
+                   });\
+    } \
+    replace2H5()';
+
     //append this script to body
     document.body.appendChild(add_script);
+    
     
 }
 
