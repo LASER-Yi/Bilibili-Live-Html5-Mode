@@ -1,37 +1,38 @@
 var re = /^http:\/\/live.bilibili.com/;
 
 if(re.exec(window.location.href) != null){
-    //var roomNum = ROOMID;
-    $.ajax({
-           //目标地址
-           url: 'http://live.bilibili.com/api/h5playurl',
-           type: 'get',
-           dataType: 'jsonp',
-           //url?后传的参数
-           data: {
-           roomid: ROOMID
-           },
-           async: false,
-           //成功后会把jsonp传到函数的参数中
-           success: function (data) {
-           console.log("Successfully return html5 URL:" + data.durl[0].url);
-           console.log(data.durl[0].url);
-           var h5Url = data.durl[0].url;
-           //删除原有flash播放器
-           var divElements = document.getElementById("player-container");
-           var needDel = document.getElementById("player_object");
-           divElements.removeChild(needDel);
-           //插入H5播放器，设置其属性
-           var h5Video = document.createElement('video');
-           h5Video.setAttribute("src", h5Url);
-           h5Video.setAttribute("width", "100%");
-           h5Video.setAttribute("height", "100%");
-           h5Video.setAttribute("id", "player_object");
-           h5Video.setAttribute("controls", "controls");
-           h5Video.setAttribute("autoplay", "autoplay");
-           divElements.appendChild(h5Video);
-           }
-           });
+    //add function called replace2H5 to change flash player to HTML5
+    var add_script = document.createElement('script');
+    add_script.innerHTML = '\
+    function replace2H5(){ \
+        $.ajax({ \
+               url: "http://live.bilibili.com/api/h5playurl", \
+               type: "get", \
+               dataType: "jsonp", \
+               data: { \
+               roomid: ROOMID \
+               }, \
+               async: false, \
+               success: function (data) { \
+               console.log("Successfully return html5 URL:" + data.durl[0].url); \
+               var h5Url = data.durl[0].url; \
+               var divElements = document.getElementById("player-container"); \
+               var needDel = document.getElementById("player_object"); \
+               divElements.removeChild(needDel); \
+               var h5Video = document.createElement("video");\
+               h5Video.setAttribute("src", h5Url); \
+               h5Video.setAttribute("width", "100%"); \
+               h5Video.setAttribute("height", "100%"); \
+               h5Video.setAttribute("id", "player_object"); \
+               h5Video.setAttribute("controls", "controls"); \
+               h5Video.setAttribute("autoplay", "autoplay"); \
+               divElements.appendChild(h5Video); \
+               } \
+               }); \
+    }';
+    //append this script to body
+    document.body.appendChild(add_script);
+    
 }
 
 
@@ -43,7 +44,7 @@ if(re.exec(window.location.href) != null){
 
 //h5Url这个变量要加到头部的变量库中，然后通过ajax给他赋值（没必要）
 
-//宝箱节点需要整个屏蔽，不然无法控制视频（叠层原因）（可能不用屏蔽，当时的网络加载不出来，估计就覆盖上去了。（待测试）
+//宝箱节点需要整个屏蔽，不然无法控制视频（叠层原因）（可能不用屏蔽，当时的网络加载不出来，估计就覆盖上去了。（已测试，不需要屏蔽宝箱节点）
 //宝箱节点 class="box-doms"
 
 
