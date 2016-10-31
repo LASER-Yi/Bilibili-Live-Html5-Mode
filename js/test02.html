@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+
+<html>
+    <body>
+        <script>
+            //原生js http请求测试
+            function m3u8Get(){
+                var httpRequest = new XMLHttpRequest();
+                if(httpRequest != null){
+                    httpRequest.onreadystatechange==state_Change;
+                    httpRequest.open("GET",originUrl,false);
+                    httpRequest.send(null);
+                }
+            }
+        function state_Change(){
+            if(httpRequest.readyState==4){
+                //4 == "Loaded"
+                if(httpRequest.status==200){
+                    //200 == "OK"
+                    document.write(httpRequest.durl[0].url);
+                }
+            }
+        }
+            var roomID = 5420;
+            var originUrl = "http://live.bilibili.com/api/h5playurl?roomid=" + roomID //+ "&callback=jsonpCallback";
+            m3u8Get();
+        </script>
+    </body>
+</html>
