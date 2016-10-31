@@ -4,6 +4,7 @@
     <body>
         <script src = "jquery.min.js"></script>
         <script>
+            var roomID = 5420;
             $.ajax({
                    url: 'http://live.bilibili.com/api/h5playurl',
                    type: 'get',
@@ -13,7 +14,7 @@
                    },
                    success: function (result) {
                    var urlData = result.durl[0].url;
-                   
+                   document.write(urlData);
                    }
                    });
         </script>
