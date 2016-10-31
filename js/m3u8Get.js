@@ -12,7 +12,7 @@ function m3u8Get(roomNum) {
            dataType: 'jsonp',
            //url?后传的参数
            data: {
-           roomid: roomNum
+           roomid: ROOMID
            },
            async: false,
            //成功后会把jsonp传到函数的参数中
