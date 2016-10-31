@@ -1,23 +1,22 @@
 <!DOCTYPE HTML>
 <script>
-    safari.application.addEventListener("command", intoPipMode, false);
+    //safari.application.addEventListener("command", intoPipMode, false);
     
     function jsonpCallback(result) {
-        //console.log(result);
+        console.log(result);
         console.log(result['durl'][0]['url']);
         var url = result['durl'][0]['url'];
-        window.open(url);
+        //window.open(url);
     }
 
-function intoPipMode(event){
-    if (event.command != "intoPipMode"){
-        return;
-    }
-    var originUrl = safari.application.activeBrowserWindow.activeTab.url;
-    //var roomid = window.location.href.match(/\d+/g);
-    originUrl = originUrl.slice(8);
-    originUrl = originUrl.slice(originUrl.indexOf("/") + 1);
-    var path = "http://live.bilibili.com/api/h5playurl?roomid=" + originUrl + "&callback=jsonpCallback";
+function intoPipMode(){
+    
+    //var originUrl = safari.application.activeBrowserWindow.activeTab.url;
+    var roomid = 5430//window.location.href.match(/\d+/g);
+    //originUrl = originUrl.slice(8);
+    //originUrl = originUrl.slice(originUrl.indexOf("/") + 1);
+    var path = "http://live.bilibili.com/api/h5playurl?roomid=" + roomid + "&callback=jsonpCallback";
     document.write(" <script   language=javascript   src= " + path + "> <\/script> ");
 }
+intoPipMode();
 </script>
