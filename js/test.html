@@ -3,11 +3,19 @@
 <html>
     <body>
         <script src = "jquery.min.js"></script>
-        <script src = "m3u8Get.js"></script>
         <script>
-            var urlhe = m3u8Get(5420);
-            //console.log(urlhe['durl'][0]['url']);
-            document.write(urlhe);
-            </script>
+            $.ajax({
+                   url: 'http://live.bilibili.com/api/h5playurl',
+                   type: 'get',
+                   dataType: 'jsonp',
+                   data:{
+                   roomid: roomID
+                   },
+                   success: function (result) {
+                   var urlData = result.durl[0].url;
+                   
+                   }
+                   });
+        </script>
     </body>
 </html>

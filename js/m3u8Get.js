@@ -1,18 +1,16 @@
 var roomID = 24065;
 
 function m3u8Get(roomID) {
-    //用.getJSON 和 .ajax都可以取到jsonp数据,只不过前者指定dataType是json,
-    //后者可以对ajax进行精确的控制,不过$.post、$.get、$.getjson最终调用的还是ajax
-    //只不过JQ对其进行了简单的封装.还有就是$.ajax返回的是readState:1,没记错的话应该
-    //是XMLHttpRequest的状态，表示连接成功的意思吧,所以并不是JSON.刚开始没注意到,
-    //以为是数据没传对(AE坑货)    2016/10/31 4:54 qqx
+    //我问了一下大黄，这个东西如果要使用的话剩下的操作就要完全放到success中去执行，
+    //因为这是个异步执行的代码，中间的success还没有拿到东西函数就把outData return回去了
+    //然而我们写的是脚本，所以可能用不上jq，
+    //很尴尬
+    //ly
     var outData = $.ajax({
         //目标地址
         url: 'http://live.bilibili.com/api/h5playurl',
         type: 'get',
         dataType: 'jsonp',
-        jsonp: 'callback',
-        jsonpCallback: "miaomiaomiao",
         //url?后传的参数
         data: {
             roomid: roomID
