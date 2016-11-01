@@ -1,10 +1,11 @@
 var re = /^http:\/\/live.bilibili.com/;
 
 if(re.exec(window.location.href) != null){
-    //add function called replace2H5 to change flash player to HTML5
+    //创建一个script标签，写入替换的函数
     var add_script = document.createElement('script');
     add_script.innerHTML = '\
     function replace2H5(){ \
+        console.log(ROOMID);\
             $.ajax({ \
                    url: "http://live.bilibili.com/api/h5playurl", \
                    type: "get",\
@@ -30,12 +31,25 @@ if(re.exec(window.location.href) != null){
                    }\
                    });\
     } \
-    replace2H5()';
+    var counterChange;\
+    var counterFlag = false;\
+    function judgeCanplayLast(){\
+        var vidState = document.getElementById("player_object").readyState;\
+        if(vidState == 4){\
+            counterFlag = true;\
+        }\
+        if(vidState == 2 && counterFlag == true){\
+            document.getElementById("player_object").load();\
+            counterFlag = false;\
+        }\
+        counterChange = setTimeout("judgeCanplayLast()",2000);\
+    } \
+    replace2H5();\
+    judgeCanplayLast()';
 
-    //append this script to body
+    //append this script to <body>
     document.body.appendChild(add_script);
-    
-    
+
 }
 
 
